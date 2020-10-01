@@ -16,30 +16,39 @@ import { Login } from './login';
 
 export const NotificationPopout = (props) => {
   return (
-    <div
-      style={{ minWidth: '390px', width: '390px', zIndex: '100', right: '4rem' }}
-      className={`fr ${props.isPopoutFocus ? '' : 'dn'} mt2 br2 absolute shadow-2 ph4 pb3 bg-white`}
-    >
-      <span className="absolute top-0 left-2 nt2 w1 h1 bg-white bl ml7 bt b--grey-light rotate-45"></span>
-      <InboxNavMini
-        newMsgCount={
-          props.state &&
-          props.state.notifications &&
-          props.state.notifications.filter((n) => !n.read).length
-        }
+    <>
+      <div
+        style={{ minWidth: '390px', width: '390px', zIndex: '100' }}
+        className={`fr ${
+          props.isPopoutFocus ? '' : 'dn'
+        } mt2 br2 absolute shadow-2 ph4 pb3 bg-white right-1 right-4-m right--1-l`}
+      >
+        <InboxNavMini
+          newMsgCount={
+            props.state &&
+            props.state.notifications &&
+            props.state.notifications.filter((n) => !n.read).length
+          }
+        />
+        <NotificationResultsMini
+          liveUnreadCount={props.liveUnreadCount}
+          retryFn={props.forceUpdate}
+          state={props.state}
+          className="tl"
+        />
+        <InboxNavMiniBottom
+          className="tl"
+          setPopoutFocus={props.setPopoutFocus}
+          msgCount={props.state && props.state.notifications && props.state.notifications.length}
+        />
+      </div>
+      <div
+        style={{ zIndex: '100' }}
+        className={`${
+          props.isPopoutFocus ? '' : 'dn'
+        } absolute w1 h1 bg-white bl bt b--grey-light rotate-45`}
       />
-      <NotificationResultsMini
-        liveUnreadCount={props.liveUnreadCount}
-        retryFn={props.forceUpdate}
-        state={props.state}
-        className="tl"
-      />
-      <InboxNavMiniBottom
-        className="tl"
-        setPopoutFocus={props.setPopoutFocus}
-        msgCount={props.state && props.state.notifications && props.state.notifications.length}
-      />
-    </div>
+    </>
   );
 };
 

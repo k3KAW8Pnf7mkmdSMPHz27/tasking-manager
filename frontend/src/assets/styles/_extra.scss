@@ -93,6 +93,12 @@ html {
   background-blend-mode: darken;
 }
 
+@media screen and (min-width: 30em) and (max-width: 60em) {
+  .right-4-m {
+    right: 4rem;
+  }
+}
+
 /* used for project progress bar */
 .hhalf {
   height: 0.5rem;

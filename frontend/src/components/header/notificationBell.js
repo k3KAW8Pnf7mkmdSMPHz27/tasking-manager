@@ -75,7 +75,7 @@ export const NotificationBell = (props) => {
       initialUnreadCount.unread);
 
   return (
-    <span ref={notificationBellRef}>
+    <div ref={notificationBellRef} className="relative-l dib">
       <TopNavLink
         to={'inbox/'}
         onClick={handleBellClick}
@@ -94,6 +94,6 @@ export const NotificationBell = (props) => {
         setPopoutFocus={setPopoutFocus}
         liveUnreadCount={liveUnreadCount}
       />
-    </span>
+    </div>
   );
 };
