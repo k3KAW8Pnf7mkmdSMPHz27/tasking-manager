@@ -24,7 +24,7 @@ export default function ProjectProgressBar({
             aria-valuenow={percentMapped}
             aria-valuemin="0"
             aria-valuemax="100"
-          ></div>
+          />
           <div
             className="absolute bg-red br-pill hhalf hide-child"
             style={{ width: `${percentValidated > 100 ? 100 : percentValidated}%` }}
@@ -32,8 +32,8 @@ export default function ProjectProgressBar({
             aria-valuenow={percentValidated}
             aria-valuemin="0"
             aria-valuemax="100"
-          ></div>
-          <div className={`bg-grey-light br-pill hhalf overflow-y-hidden`}></div>
+          />
+          <div className={`bg-grey-light br-pill hhalf overflow-y-hidden`} />
           {isHovered && (
             <span
               className="db absolute top-1 z-1 dib bg-blue-dark ba br2 b--blue-dark pa2 shadow-5"
@@ -59,7 +59,7 @@ export default function ProjectProgressBar({
                   />
                 </p>
               )}
-              <span className="absolute top-0 left-2 nt2 w1 h1 bg-blue-dark bl bt b--blue-dark rotate-45"></span>
+              <span className="absolute top-0 left-2 nt2 w1 h1 bg-blue-dark bl bt b--blue-dark rotate-45"/>
             </span>
           )}
         </div>

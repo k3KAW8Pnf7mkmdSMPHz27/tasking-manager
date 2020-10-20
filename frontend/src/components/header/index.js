@@ -86,30 +86,30 @@ const AuthButtons = (props) => {
 };
 
 const PopupItems = (props) => {
+  const alwaysVisibleNavItems = props.menuItems.filter((item) => item.showAlways);
+  const otherNavItems = props.menuItems.filter((item) => !item.showAlways);
+
   return (
     <div className="v-mid tc">
-      {/* links that don't require authentication */}
-      {props.menuItems
-        .filter((item) => item.authenticated === false || item.showAlways)
-        .map((item, n) => (
-          <p key={n}>
-            <Link to={item.link} className={props.linkCombo} onClick={props.close}>
-              <FormattedMessage {...item.label} />
-            </Link>
-          </p>
-        ))}
-      <p className="bb b--grey-light"></p>
-      {/* links that require authentication */}
-      {props.userDetails.username &&
-        props.menuItems
-          .filter((item) => item.authenticated === true)
-          .map((item, n) => (
+      {alwaysVisibleNavItems.map((item, n) => (
+        <p key={n}>
+          <Link to={item.link} className={props.linkCombo} onClick={props.close}>
+            <FormattedMessage {...item.label} />
+          </Link>
+        </p>
+      ))}
+      {otherNavItems.length > 0 && (
+        <>
+          <p className="bb b--grey-light" />
+          {otherNavItems.map((item, n) => (
             <p key={n}>
               <Link to={item.link} className={props.linkCombo} onClick={props.close}>
                 <FormattedMessage {...item.label} />
               </Link>
             </p>
           ))}
+        </>
+      )}
       {/* user links */}
       {props.userDetails.username && (
         <>
@@ -121,6 +121,7 @@ const PopupItems = (props) => {
         </>
       )}
       {/* authentication section */}
+      <p className="bb b--grey-light" />
       {props.userDetails.username ? (
         <Button className="bg-blue-dark white" onClick={() => props.logout()}>
           <FormattedMessage {...messages.logout} />
@@ -258,7 +259,10 @@ class Header extends React.Component {
                   <div>
                     <PopupItems
                       userDetails={this.props.userDetails}
-                      menuItems={getMenuItensForUser(this.props.userDetails)}
+                      menuItems={getMenuItensForUser(
+                        this.props.userDetails,
+                        this.props.organisations,
+                      )}
                       linkCombo={this.linkCombo}
                       logout={this.props.logout}
                       location={this.props.location}
